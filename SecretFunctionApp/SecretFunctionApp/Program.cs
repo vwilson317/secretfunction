@@ -12,7 +12,6 @@ namespace SecretFunctionApp
             var shouldExit = false;
             while (!shouldExit)
             {
-
                 Console.WriteLine("Input an Int");
                 int? input = null;
                 try
@@ -29,18 +28,15 @@ namespace SecretFunctionApp
                 if (input != null)
                 {
                     var helperClass = new HelperClass();
-                    var primeNumbers = helperClass.GetPrimeNumbers(input.Value);
-                    var primeNumbersLessThanInput = primeNumbers.Where(x => x < input.Value).ToList();
+                    var primeNumbersLessThanInput = helperClass.GetPrimeNumbers(input.Value);
 
                     Console.WriteLine(string.Join(", ", primeNumbersLessThanInput));
-                    //check if secret function is additive
+
                     var isAdditive = helperClass.IsFuncAdditiveForAllInputs(primeNumbersLessThanInput, SecretFunction);
                     Console.WriteLine($"The {nameof(SecretFunction)} isAdditive equals: {isAdditive}");
 
                     Console.WriteLine("Press any key to enter another input. Enter [x] to exit program.");
                     shouldExit = Console.ReadLine() == "x";
-
-                    //print the result
                 }
             }
         }
@@ -49,6 +45,5 @@ namespace SecretFunctionApp
         {
             return someNumber;
         }
-
     }
 }

@@ -9,12 +9,11 @@ namespace SecretFunctionApp
         /// Gets a list of prime numbers contain
         /// </summary>
         /// <param name="input"></param>
-        /// <param name="inclusiveIndicator">When true if value passed in as a is a prime number it will be returned in the list of prime numbers. False input value will not be contained in output list.</param>
+        /// <param name="inclusiveIndicator">When true if value passed in is a prime number it will be returned in the list of prime numbers. False input value will not be contained in output list.</param>
         /// <returns></returns>
         public List<int> GetPrimeNumbers(int input, bool inclusiveIndicator = false)
         {
             List<int> primeNumbers = new List<int>();
-            //get prime numbers
             if (inclusiveIndicator)
             {
                 for (int i = 2; i <= input; i++)
@@ -34,7 +33,7 @@ namespace SecretFunctionApp
         }
 
         /// <summary>
-        /// Adds value to a list if the value is a prime number
+        /// Adds value i to a list if the value is a prime number
         /// </summary>
         /// <param name="i"></param>
         /// <param name="primeNumbers"></param>
@@ -97,12 +96,5 @@ namespace SecretFunctionApp
             var isAdditive = someFunc(x + y) == someFunc(x) + someFunc(y);
             return isAdditive;
         }
-    }
-
-    public interface IHelperClass
-    {
-        List<int> GetPrimeNumbers(int input, bool inclusiveIndicator = false);
-        bool IsFuncAdditiveForAllInputs(List<int> numbers, Func<int, int> someFunc);
-        bool IsFunctionAdditive(Func<int, int> someFunc, int x, int y);
     }
 }
