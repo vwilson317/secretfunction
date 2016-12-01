@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,23 +9,46 @@ namespace SecretFunctionApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Input an Int");
-            int? input = null;
-            try
+            var shouldExit = false;
+            while (!shouldExit)
             {
-                input = Int16.Parse(Console.ReadLine());
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Invaild input");
-                Console.WriteLine(e.Message);
-                Console.ReadLine();
-            }
 
-            if (input != null)
-            {
-                
+                Console.WriteLine("Input an Int");
+                int? input = null;
+                try
+                {
+                    input = Int16.Parse(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Invalid input");
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
+
+                if (input != null)
+                {
+                    var helperClass = new HelperClass();
+                    var primeNumbers = helperClass.GetPrimeNumbers(input.Value);
+                    var primeNumbersLessThanInput = primeNumbers.Where(x => x < input.Value).ToList();
+
+                    Console.WriteLine(string.Join(", ", primeNumbersLessThanInput));
+                    //check if secret function is additive
+                    var isAdditive = helperClass.IsFuncAdditiveForAllInputs(primeNumbersLessThanInput, SecretFunction);
+                    Console.WriteLine($"The {nameof(SecretFunction)} isAdditive equals: {isAdditive}");
+
+                    Console.WriteLine("Press any key to enter another input. Enter [x] to exit program.");
+                    shouldExit = Console.ReadLine() == "x";
+
+                    //print the result
+                }
             }
         }
+
+        public static int SecretFunction(int someNumber)
+        {
+            return someNumber;
+        }
+
     }
 }
